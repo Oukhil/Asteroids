@@ -43,7 +43,13 @@ def main():
         pygame.display.flip()
         dt = clock.tick(60) / 1000
         updatable.update(dt)
+            
         for asteroid in asteroids:
+            for shot in shots:
+                if asteroid.colides_with(shot):
+                    log_event("asteroid_shot")
+                    asteroid.split()
+                    pygame.sprite.Sprite.kill(shot)
             if asteroid.colides_with(player):
                 log_event("player_hit")
                 print("Game over!")
